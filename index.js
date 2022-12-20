@@ -17,6 +17,9 @@ app.get("/", (req, res) => {
     res.send("Server in running on port 5000")
 })
 
+
+mongoose.set("strictQuery", false)
+
 // connecting mongoose with mongodb
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.n72f5gi.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 .then(() => console.log("Database is connected successfully"))
