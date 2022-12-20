@@ -71,4 +71,18 @@ router.put("/:id", async(req, res) => {
     }
 })
 
+
+router.delete("/:id", async(req, res) => {
+    try {
+        await Appointment.deleteOne({_id: req.params.id}, (err) => {
+            if(!err){
+                res.status(200).json({message: "Appointment deleted successfully"})
+            }
+        }).clone().catch((err) => console.log(err))
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
 module.exports = router
