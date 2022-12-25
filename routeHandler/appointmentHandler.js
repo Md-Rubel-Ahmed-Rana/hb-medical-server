@@ -9,36 +9,26 @@ const Appointment = new mongoose.model("Appointment", appointmentSchema)
 // get all the appointments
 router.get("/", async(req, res) => {
     try {
-         await Appointment.find({}, (err, data) => {
-            if (err) {
-                res.status(500).json({ error: "There was an server side error occured" })
-            } else {
-                res.status(200).json({
-                    success: true,
-                    result: data
-                })
-            }
-         }).clone().catch((errr) => console.log(errr))
+        const data = await Appointment.find({})
+        res.status(200).json({
+            success: true,
+            result: data
+        })
     }catch (error) {
-        console.log(error);
+        res.status(500).json({ error: "There was an server side error occured" })
     }
 })
 
 // get an appointment
-router.get("/:id", async(req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        await Appointment.findOne({_id: req.params.id}, (err, data) => {
-            if (err) {
-                res.status(500).json({ error: "There was an server side error occured" })
-            } else {
-                res.status(200).json({
-                    success: true,
-                    result: data
-                })
-            }
-        }).clone().catch((errr) => console.log(errr))
+        const data = await Appointment.findOne({ _id: req.params.id })
+        res.status(200).json({
+            success: true,
+            result: data
+        })
     } catch (error) {
-        console.log(error);
+        res.status(500).json({ error: "There was an server side error occured" })
     }
 })
 
@@ -56,19 +46,15 @@ router.post("/", async(req, res) => {
 })
 
 // update an appointment
-router.put("/:id", async(req, res) => {
-    try {
-        await Appointment.updateOne({ _id: ObjectId(req.params.id) }, { $set: { gender: "Female" } }, 'strictQuery', false, (err) => {
+router.put("/:id",(req, res) => {
+
+    Appointment.updateOne({ _id: ObjectId(req.params.id) }, { $set: { gender: "Female" } }, 'strictQuery', false, (err) => {
             if (err) {
                 res.status(500).json({ error: "There was an server side error occured" })
             } else {
                 res.status(200).json({ message: "Appointment updated successfully" })
             }
         }).clone().catch((errr) => console.log(errr))
-        
-    } catch (error) {
-        console.log(error);   
-    }
 })
 
 

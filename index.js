@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors")
 require("dotenv").config();
 const appointmentHandler = require("./routeHandler/appointmentHandler")
+const doctorHandler = require("./routeHandler/doctorsHandler")
 
 
 // initialize express app
@@ -27,6 +28,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD
 
 // appointment handler
 app.use("/appointment", appointmentHandler)
+app.use("/doctors", doctorHandler)
 
 
 
