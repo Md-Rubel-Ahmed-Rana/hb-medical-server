@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const doctorSchema = require("../schemas/doctorSchema");
 const Doctor = mongoose.model("Doctor", doctorSchema);
-
+ 
 // get all the doctors
 router.get("/", (req, res) => {
      Doctor.find({}, (err, data) =>{

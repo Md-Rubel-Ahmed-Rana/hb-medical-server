@@ -42,7 +42,7 @@ router.post("/", async(req, res) => {
         }else{
             res.status(200).json({ message: "Appointment booked successfully"})
         }
-    }).clone().catch((errr) => console.log(errr))
+    })
 })
 
 // update an appointment
@@ -57,7 +57,7 @@ router.put("/:id",(req, res) => {
         }).clone().catch((errr) => console.log(errr))
 })
 
-
+// delete an appointment
 router.delete("/:id", async(req, res) => {
     try {
         await Appointment.deleteOne({_id: req.params.id}, (err) => {
